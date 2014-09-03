@@ -1,0 +1,158 @@
+https://shop.smartthings.com/#!/kits?scrollTo=home-security-kits#home-security-kits - Smart Things - Samsung
+
+http://www.ebay.com/itm/251154726090 - 1pcs Solid State Relay SSR-40DA 40A /250V 3-32VDC - US $4.36
+
+http://ru.aliexpress.com/item/New-5V-8-Channel-Relay-Module-Board-for-Arduino-PIC-AVR-MCU-DSP-ARM-Electronic-11121/663483123.html?promotionVersion=1 \
+	- Arduino PIC AVR MCU DSP -  US $ 8.41 
+	
+http://www.noo.com.by/sistema-noolite.html - Noolite system
+http://www.noo.com.by/infografika-po-sisteme-nookite.html
+
+
+Protocol NooLite
+
+http://habrahabr.ru/company/contactless/blog/229469/
+http://habrahabr.ru/company/contactless/blog/216023/
+http://habrahabr.ru/post/222663/
+
+
+For demonstration need Sensors :
+
+Transmitters
+http://thinking-home.ru/product/39.aspx - Three light switch mounted in the junction box - 20,8 $
+http://www.noo.com.by/pult-pu112-1.html - RGB light switch - 20,8 $
+
+USB transmitter fot TP-Link
+http://thinking-home.ru/product/29.aspx 66 $
+or http://www.noo.com.by/adapter-dlya-pk-pc1132.html
+Soft:
+https://github.com/Sicness/pyNooLite - free
+
+Receiver
+USB reciever for TP-link
+http://thinking-home.ru/product/34.aspx - 45 $
+or http://www.noo.com.by/adapter-dlya-kompyutera-rx1164.html
+Soft:
+https://github.com/ermolenkom/noolite - free
+
+Dimmers
+http://www.noo.com.by/silovoj-blok-st111-500.html - 500 Wt - 23,9 $
+http://www.noo.com.by/silovoj-blok-SD111-180.html - RGB controller. - 37,3 $
+
+3 pieces ~ Simple RF (TX and RX) modules (not work with NooLight, but cost 2$)  
+http://www.ebay.com/itm/1pcs-433Mhz-RF-transmitter-and-receiver-kit-Arduino-project-/261041100836?pt=LH_DefaultDomain_0&hash=item3cc7431824
+ 
+KIT ! 5m 10m 5050 RGB 3528 LED Light Strip Striplight + Remote + Control +Supply
+http://www.ebay.com/itm/KIT-5m-10m-5050-RGB-3528-LED-Light-Strip-Striplight-Remote-Control-Supply-/171077066245    $17.59 - 10M
+
+Nodered:
+
+Problem on heroku.com.
+http://www.noo.com.by/adapter-dlya-pk-pc1132.html
+FI-WARE
+https://cloud.lab.fi-ware.org/
+
+Mosquitto
+
+wajig install mosquitto mosquitto-clients python-mosquitto libmosquitto0
+wajig restart mosquitto
+
+
+Node-red
+http://nodered.org/
+
+
+nano  /etc/init/node-red.conf 
+update-rc.d node-red defaults
+
+
+adduser fiware 
+
+su - fiware
+mkdir -p ~/.nodes && cd ~/.nodes
+
+
+curl -O http://nodejs.org/dist/v0.10.12/node-v0.10.12-linux-x64.tar.gz
+tar -xzf node-v0.10.12-linux-x64.tar.gz
+mv node-v0.10.12-linux-x64 0.10.12
+ln -s 0.10.12 current
+export PATH="~/.nodes/current/bin:$PATH"
+rm ~/.nodes/node-v0.10.12-linux-x64.tar.gz
+node --version
+npm install expres
+
+git clone https://github.com/node-red/node-red.git
+cd node-red/
+
+npm install
+
+node red.js 
+curl http://127.0.0.1:1880/
+
+cd /home/fiware/
+cd node-red/
+
+nano settings.js
+
+node red.js 
+
+nano /etc/init.d/node-red
+
+cat<+++++++++++++++++++++++++++++++++++
+##!/bin/sh
+# /etc/init.d/node-red
+#
+
+# Some things that run always
+touch /var/lock/blah
+export PATH="/home/fiware/.nodes/current/bin:$PATH"
+
+# PATH should only include /usr/* if it runs after the mountnfs.sh script
+# PATH=/sbin:/usr/sbin:/bin:/usr/bin:/usr/local/bin
+DESC="Node Red Server"
+NAME=node-red
+SCREENNAME=node-red # the session screen game given
+
+DAEMON="/usr/bin/screen"
+DAEMONUSER=fiware
+DAEMONGROUP=daemon
+
+DAEMON_ARGS="-DmS $SCREENNAME /home/fiware/.nodes/current/bin/node /home/fiware/node-red/red.js " 
+#DAEMON_ARGS="-DmS $SCREENNAME java -Xincgc -Xms32M -Xmx1024M -jar /usr/local/minecraft/$NAME -o false nogui" 
+
+ # Lowest memory limit used was about 80M on fresh start.
+ # For screen we use `-DmS` instead of -dmS since -D dosen't detach the screen so our pid 
+ # file created by start-stop-deamon is correct. 
+PIDFILE=/usr/local/minecraft/$NAME.pid
+SCRIPTNAME=/etc/init.d/$NAME
+
+# Exit if the package is not installed
+#[ -f "$DAEMON" ] || exit 0
+# Read configuration variable file if it is present
+[ -r /etc/default/$NAME ] && . /etc/default/$NAME
+
+# Load the VERBOSE setting and other rcS variables
+. /lib/init/vars.sh
+
+# Define LSB log_* functions.
+# Depend on lsb-base (>= 3.0-6) to ensure that this file is present.
+. /lib/lsb/init-functions
+
+
+car<+++++++++++++++++++++++++++++++++++
+
+/etc/init.d/node-red start
+
+Extra nodes (STOMP, XMMP, etc)
+
+https://github.com/node-red/node-red-nodes
+
+
+
+
+
+
+
+
+
+
